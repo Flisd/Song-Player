@@ -10,6 +10,10 @@ public class Song {
     String currentAudioPathName;
 
     private int duration; // in seconds
+    
+    private int currentTime = 0; // in seconds
+
+    private long lastUpdateMillis = 0;
 
     private boolean isPlaying;
 
@@ -20,7 +24,7 @@ public class Song {
         this.nextImagePathName = "redDead.png";
         this.nextNextImagePathName = "redDead.png";
         this.currentAudioPathName = "redDead.mp3";
-        this.duration = 60;
+        this.duration = 5;
     }
 
     public void next(){
@@ -30,8 +34,6 @@ public class Song {
     public void togglePlay() {
         isPlaying = !isPlaying;
     }
-
-
 
     public void previous(){
         update();
@@ -71,6 +73,14 @@ public class Song {
     }
 
     public double getCurrentTime() {
-        return 2;
+        return currentTime;
+    }
+
+    public void updateCurrentTime() {
+        long now = System.currentTimeMillis();
+        if (now - lastUpdateMillis >= 1000) {
+            currentTime += 1;
+            lastUpdateMillis = now;
+        }
     }
 }

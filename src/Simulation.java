@@ -92,8 +92,15 @@ public class Simulation {
         durationButton.setGradient(Color.ORANGE, Color.RED);
         durationButton.update();
         durationButton.draw();
-        double progress = song.getCurrentTime() / (double) song.getDuration();
-        durationButton.drawProgressBar(progress, Color.GREEN);
+
+        int maxHalfWidth = 220;
+        double progress = Math.min(song.getCurrentTime() / (double) song.getDuration(), 1.0);
+        double realHalfWidth = progress * maxHalfWidth;
+        double centerX = 150 - maxHalfWidth + realHalfWidth;
+        StdDraw.setPenColor(new Color(239, 223, 223, 169));
+        StdDraw.filledRectangle(centerX, -200, realHalfWidth, 15);
+
+        song.updateCurrentTime();
 
         Button playButton = new Button(150, -250, 70, 40, "▷");
         playButton.setGradient(Color.ORANGE, Color.RED);
