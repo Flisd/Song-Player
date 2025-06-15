@@ -40,7 +40,7 @@ public class Circle {
         int end = ((endAngle % 360) + 360) % 360;
         boolean inArc = (start < end) ? (angle >= start && angle <= end) : (angle >= start || angle <= end);
         double dist = Math.sqrt(dx * dx + dy * dy);
-        boolean atRadius = Math.abs(dist - radius) < ballRadius;
+        boolean atRadius = dist + ballRadius >= radius && dist - ballRadius <= radius;
         return inArc && atRadius;
     }
 
