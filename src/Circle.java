@@ -17,6 +17,33 @@ public class Circle {
         this.randIncrement = rand.nextInt(5) + 1;
     }
 
+    public void autoUpdateAnglesRandomly() {
+        startAngle += randIncrement;
+        endAngle += randIncrement;
+    }
+
+    public void draw() {
+        StdDraw.setPenColor(Simulation.backgroundColor);
+        StdDraw.circle(0, 0, radius);
+
+        StdDraw.setPenColor(color);
+
+        StdDraw.arc(0, 0, radius, startAngle, endAngle);
+    }
+
+    public boolean isCollision(double ballX, double ballY, double ballRadius, double centerX, double centerY) {
+        double dx = ballX - centerX;
+        double dy = ballY - centerY;
+        double angle = Math.toDegrees(Math.atan2(dy, dx));
+        if (angle < 0) angle += 360;
+        int start = ((startAngle % 360) + 360) % 360;
+        int end = ((endAngle % 360) + 360) % 360;
+        boolean inArc = (start < end) ? (angle >= start && angle <= end) : (angle >= start || angle <= end);
+        double dist = Math.sqrt(dx * dx + dy * dy);
+        boolean atRadius = Math.abs(dist - radius) < ballRadius;
+        return inArc && atRadius;
+    }
+
     public int getRadius() {
         return radius;
     }
@@ -43,19 +70,5 @@ public class Circle {
 
     public void setEndAngle(int endAngle) {
         this.endAngle = endAngle;
-    }
-
-    public void autoUpdateAnglesRandomly() {
-        startAngle += randIncrement;
-        endAngle += randIncrement;
-    }
-
-    public void draw() {
-        StdDraw.setPenColor(Simulation.backgroundColor);
-        StdDraw.circle(0, 0, radius);
-
-        StdDraw.setPenColor(color);
-
-        StdDraw.arc(0, 0, radius, startAngle, endAngle);
     }
 }
