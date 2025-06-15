@@ -23,12 +23,12 @@ public class Circle {
     }
 
     public void draw() {
-        StdDraw.setPenColor(Simulation.backgroundColor);
-        StdDraw.circle(0, 0, radius);
+//        StdDraw.setPenColor(Simulation.backgroundColor);
+//        StdDraw.circle(0, 0, radius);
 
         StdDraw.setPenColor(color);
 
-        StdDraw.arc(0, 0, radius, startAngle, endAngle);
+        StdDraw.arc(-20, 170, radius, startAngle, endAngle);
     }
 
     public boolean isCollision(double ballX, double ballY, double ballRadius, double centerX, double centerY) {

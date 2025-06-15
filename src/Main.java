@@ -1,4 +1,6 @@
 public class Main {
+    public static int height = Simulation.size;
+    public static int width = Simulation.size;
     public static void main(String[] args) {
         int size = Simulation.size;
         // set up canvas
