@@ -1,12 +1,26 @@
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Simulation {
-    public int size = 800;
+    public static int size = 800;
     private int level = 0;
-    public static Color backgroundColor = Color.BLACK;
+    public static Color backgroundColor = Color.black;
+    private List<Circle> circles = new ArrayList<>();
+    Random rand = new Random();
 
     public Simulation() {
 
+        circles.add(new Circle(55, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(62, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(70, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(81, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(93, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(107, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(123, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(141, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(162, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
+        circles.add(new Circle(186, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
     }
 
     public Simulation(int level) {
@@ -14,14 +28,11 @@ public class Simulation {
     }
 
     public void run() {
-        // set up canvas
-        StdDraw.setCanvasSize(size, size); //set up drawing canvas
-        StdDraw.setXscale((double) -size / 2, (double) size / 2); // Center is now <0, 0>
-        StdDraw.setYscale((double) -size / 2, (double) size / 2);
-        StdDraw.setPenRadius(0.01);
-
-        StdDraw.clear(backgroundColor);
-        Circle circle = new Circle(100, 0, 270);
-        circle.draw();
+        for (Circle circle : circles) {
+//            circle.setStartAngle(circle.getStartAngle() + 1);
+//            circle.setEndAngle(circle.getEndAngle() + 1);
+            circle.autoUpdateAnglesRandomly();
+            circle.draw();
+        }
     }
 }
