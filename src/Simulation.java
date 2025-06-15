@@ -16,6 +16,7 @@ public class Simulation {
 
     Song song = new Song();
 
+    private long lastPlayButtonClickTime = 0;
 
     public Simulation() {
 
@@ -106,8 +107,15 @@ public class Simulation {
         playButton.setGradient(Color.ORANGE, Color.RED);
         playButton.update();
         playButton.draw();
-        if (playButton.isClicked())
-            song.togglePlay();
+
+        if (playButton.isClicked()) {
+            long currentTime = System.currentTimeMillis();
+            if (lastPlayButtonClickTime == 0 || currentTime - lastPlayButtonClickTime >= 500) {
+                lastPlayButtonClickTime = currentTime;
+                song.togglePlay();
+                System.out.println("Play/Pause clicked. is playing: " + song.isPlayingSong());
+            }
+        }
 
     }
 }
