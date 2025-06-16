@@ -19,7 +19,7 @@ public class Main {
 
             simulation.run();
 
-            StdDraw.pause(10);
+            StdDraw.pause(1);
             StdDraw.show();
         }
     }
