@@ -1,19 +1,20 @@
 import javax.sound.sampled.*;
 import java.io.File;
-public class Song implements Runnable {
+import java.io.IOException;
+
+public class Song {
     private String nameOfSong;
     private String artist;
-    String currentImagePathName;
-    String currentAudioPathName;
-    private int duration; // in seconds
-    private int currentTime = 0; // in seconds
+    private String currentImagePathName;
+    private String currentAudioPathName;
+    private int duration; // seconds, from metadata
+
+    private int currentTime = 0; // for visual tracking
     private long lastUpdateMillis = 0;
+
     private boolean isPlaying = false;
-    int songIndex = 0;
-    private long clipTimePosition = 0;
     private Clip clip;
-    private Thread playThread;
-    private boolean stopRequested = false;
+    private long clipMicrosecondPos = 0;
 
     public Song(String nameOfSong, String artist, String currentImagePathName, int duration, String currentAudioPathName) {
         this.nameOfSong = nameOfSong;
@@ -21,131 +22,89 @@ public class Song implements Runnable {
         this.currentImagePathName = currentImagePathName;
         this.currentAudioPathName = currentAudioPathName;
         this.duration = duration;
+        loadClip();
     }
 
-    public void next() {
-        update();
-    }
-
-    public void togglePlay() {
-        if (isPlaying) {
-            pauseSong();
-        } else {
-            resumeSong();
-        }
-        isPlaying = !isPlaying;
-    }
-
-    public void pauseSong() {
-        if (clip != null && clip.isRunning()) {
-            clipTimePosition = clip.getMicrosecondPosition();
-            clip.stop();
-            isPlaying = false;
-        }
-    }
-
-    public void resumeSong() {
-        if (clip != null) {
-            clip.setMicrosecondPosition(clipTimePosition);
-            clip.start();
-            isPlaying = true;
-        }
-    }
-
-    public void previous() {
-        update();
-    }
-
-    public void update() {
-    }
-
-    public String getNameOfSong() {
-        return nameOfSong;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public String getCurrentImagePathName() {
-        return currentImagePathName;
-    }
-
-    public String getCurrentAudioPathName() {
-        return currentAudioPathName;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public double getCurrentTime() {
-        return currentTime;
-    }
-
-    public void updateCurrentTime() {
-        long now = System.currentTimeMillis();
-        if (now - lastUpdateMillis >= 1000 && isPlaying) {
-            currentTime += 1;
-            lastUpdateMillis = now;
-        }
-    }
-
-    public boolean isPlayingSong() {
-        return isPlaying;
-    }
-
-    public void playSong() {
-        if (playThread != null && playThread.isAlive()) {
-            stopRequested = true;
-            try {
-                playThread.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        stopRequested = false;
-        playThread = new Thread(this);
-        playThread.start();
-    }
-
-    public void stopSong() {
-        stopRequested = true;
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-        }
-        if (playThread != null && playThread.isAlive()) {
-            try {
-                playThread.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
-
-    @Override
-    public void run() {
+    private void loadClip() {
         try {
-            isPlaying = true;
-            currentTime = 0;
-            lastUpdateMillis = System.currentTimeMillis();
-
             File audioFile = new File("res/" + currentAudioPathName);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
-            clip.start();
-
-            while (!stopRequested && clip.isRunning()) {
-                updateCurrentTime(); // properly handles 1-second ticks
-                Thread.sleep(100);
-            }
-
-        } catch (Exception e) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
-        } finally {
+            System.out.println("Error loading audio: " + currentAudioPathName);
+        }
+    }
+
+    public void togglePlay() {
+        if (clip == null) return;
+
+        if (isPlaying) {
+            pause();
+        } else {
+            resume();
+        }
+    }
+
+    public void pause() {
+        if (clip != null && isPlaying) {
+            clipMicrosecondPos = clip.getMicrosecondPosition();
+            clip.stop();
             isPlaying = false;
         }
     }
 
+    public void resume() {
+        if (clip != null && !isPlaying) {
+            clip.setMicrosecondPosition(clipMicrosecondPos);
+            clip.start();
+            isPlaying = true;
+            lastUpdateMillis = System.currentTimeMillis();
+        }
+    }
+
+    public void stop() {
+        if (clip != null) {
+            clip.stop();
+            clip.setMicrosecondPosition(0);
+            clipMicrosecondPos = 0;
+            isPlaying = false;
+            currentTime = 0;
+        }
+    }
+
+    public void update() {
+        if (!isPlaying) return;
+        long now = System.currentTimeMillis();
+        if (now - lastUpdateMillis >= 1000) {
+            currentTime++;
+            lastUpdateMillis = now;
+        }
+
+        if (currentTime >= duration) {
+            stop(); // stop when duration exceeded
+        }
+    }
+
+    // Getters
+    public boolean isPlayingSong() { return isPlaying; }
+    public int getCurrentTime() { return currentTime; }
+    public int getDuration() { return duration; }
+    public String getNameOfSong() { return nameOfSong; }
+    public String getArtist() { return artist; }
+    public String getCurrentImagePathName() { return currentImagePathName; }
+    public String getCurrentAudioPathName() { return currentAudioPathName; }
+
+    public void next() {
+    }
+
+    public void previous() {
+    }
+
+    public void updateCurrentTime() {
+    }
+
+    public void playSong() {
+    }
 }
