@@ -99,10 +99,4 @@ public class Song {
 
     public void playSong() {
     }
-
-    public void previous() {
-    }
-
-    public void next() {
-    }
 }

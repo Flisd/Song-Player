@@ -16,6 +16,12 @@ public class Simulation {
 
     Album album = new Album();
 
+    private boolean nextPressedLastFrame = false;
+    private boolean prevPressedLastFrame = false;
+
+    private long lastNextPrevClickTime = 0;
+
+
     private long lastPlayButtonClickTime = 0;
 
     public Simulation() {
@@ -84,10 +90,31 @@ public class Simulation {
         NameOfArtist.draw();
 
 
-        if (nextButton.isClicked())
-            album.next();
-        else if (previousButton.isClicked())
-            album.previous();
+
+
+        long currentTime = System.currentTimeMillis();
+
+// Next button edge detection
+        boolean nextPressedNow = nextButton.isClicked();
+        if (nextPressedNow && !nextPressedLastFrame) {
+            if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
+                lastNextPrevClickTime = currentTime;
+                album.next();
+            }
+        }
+        nextPressedLastFrame = nextPressedNow;
+
+// Prev button edge detection
+        boolean prevPressedNow = previousButton.isClicked();
+        if (prevPressedNow && !prevPressedLastFrame) {
+            if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
+                lastNextPrevClickTime = currentTime;
+                album.previous();
+            }
+        }
+        prevPressedLastFrame = prevPressedNow;
+
+
 
         Button durationButton = new Button(150, -200, 450, 40);
         durationButton.setGradient(Color.ORANGE, Color.RED);
@@ -109,9 +136,9 @@ public class Simulation {
         playButton.draw();
 
         if (playButton.isClicked()) {
-            long currentTime = System.currentTimeMillis();
-            if (lastPlayButtonClickTime == 0 || currentTime - lastPlayButtonClickTime >= 500) {
-                lastPlayButtonClickTime = currentTime;
+            long currentTime1 = System.currentTimeMillis();
+            if (lastPlayButtonClickTime == 0 || currentTime1 - lastPlayButtonClickTime >= 500) {
+                lastPlayButtonClickTime = currentTime1;
                 album.getNextSong().togglePlay();
                 System.out.println("Play/Pause clicked. is playing: " + album.getNextSong().isPlayingSong());
             }
