@@ -1,3 +1,5 @@
 1~Oh My Lovely~Daniel Lanoids~redDead.png~192~Oh My Lovely.wav
 2~Another Day in Paradise~Phil Collins~paradise.png~322~Another Day in Paradise.wav
 3~Summer of '69~Bryan Adams~summer.png~216~Summer of '69.wav
+4~Stronger~Kanye West~graduation.png~312~Stronger.wav
+5~I wonder~Kanye West~graduation.png~243~I Wonder.wav
