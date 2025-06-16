@@ -14,7 +14,7 @@ public class Simulation {
 
     Random rand = new Random();
 
-    Song song = new Song();
+    Album album = new Album();
 
     private long lastPlayButtonClickTime = 0;
 
@@ -52,9 +52,9 @@ public class Simulation {
             bar.draw();
         }
 
-        StdDraw.picture(-300, 200, "res/" + song.nextImagePathName, 150, 150);
-        StdDraw.picture(-225, 125, "res/" + song.nextNextImagePathName, 70, 70);
-        StdDraw.picture(-200, -150, "res/" + song.currentImagePathName, 200, 200);
+        StdDraw.picture(-300, 200, "res/" + album.nextImagePathName, 150, 150);
+        StdDraw.picture(-225, 125, "res/" + album.nextNextImagePathName, 70, 70);
+        StdDraw.picture(-200, -150, "res/" + album.currentImagePathName, 200, 200);
 
 
         Font font = new Font("Monospaced", Font.BOLD, 25);
@@ -73,21 +73,21 @@ public class Simulation {
         font = new Font("Monospaced", Font.BOLD, 20);
         StdDraw.setFont(font);
 
-        Button NameOfSong = new Button(125, -75, 450, 40, song.getTitle());
+        Button NameOfSong = new Button(125, -75, 450, 40, album.getNextSong().getNameOfSong().substring(0, Math.min(album.getNextSong().getNameOfSong().length(), 30)));
         NameOfSong.setGradient(Color.ORANGE, Color.RED);
         NameOfSong.update();
         NameOfSong.draw();
 
-        Button NameOfArtist = new Button(13, -125, 225, 40, song.getArtist());
+        Button NameOfArtist = new Button(13, -125, 225, 40, album.getNextSong().getArtist().substring(0, Math.min(album.getNextSong().getArtist().length(), 15)));
         NameOfArtist.setGradient(Color.ORANGE, Color.RED);
         NameOfArtist.update();
         NameOfArtist.draw();
 
 
         if (nextButton.isClicked())
-            song.next();
+            album.getNextSong().next();
         else if (previousButton.isClicked())
-            song.previous();
+            album.getNextSong().previous();
 
         Button durationButton = new Button(150, -200, 450, 40);
         durationButton.setGradient(Color.ORANGE, Color.RED);
@@ -95,13 +95,13 @@ public class Simulation {
         durationButton.draw();
 
         int maxHalfWidth = 220;
-        double progress = Math.min(song.getCurrentTime() / (double) song.getDuration(), 1.0);
+        double progress = Math.min(album.getNextSong().getCurrentTime() / (double) album.getNextSong().getDuration(), 1.0);
         double realHalfWidth = progress * maxHalfWidth;
         double centerX = 150 - maxHalfWidth + realHalfWidth;
         StdDraw.setPenColor(new Color(239, 223, 223, 169));
         StdDraw.filledRectangle(centerX, -200, realHalfWidth, 15);
 
-        song.updateCurrentTime();
+        album.getNextSong().updateCurrentTime();
 
         Button playButton = new Button(150, -250, 70, 40, "▷");
         playButton.setGradient(Color.ORANGE, Color.RED);
@@ -112,10 +112,13 @@ public class Simulation {
             long currentTime = System.currentTimeMillis();
             if (lastPlayButtonClickTime == 0 || currentTime - lastPlayButtonClickTime >= 500) {
                 lastPlayButtonClickTime = currentTime;
-                song.togglePlay();
-                System.out.println("Play/Pause clicked. is playing: " + song.isPlayingSong());
+                album.getNextSong().togglePlay();
+                System.out.println("Play/Pause clicked. is playing: " + album.getNextSong().isPlayingSong());
             }
         }
 
+        if(album.getSong(album.currentSongIndex).isPlayingSong()){
+            album.getSong(album.currentSongIndex).playSong();
+        }
     }
 }
