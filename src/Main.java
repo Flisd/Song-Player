@@ -2,6 +2,9 @@ public class Main {
     public static int height = Simulation.size;
     public static int width = Simulation.size;
     public static void main(String[] args) {
+        // links
+        // https://spotidownloader.com/en
+        // https://cloudconvert.com/mp3-to-wav
         int size = Simulation.size;
         // set up canvas
         StdDraw.setCanvasSize(size, size); //set up drawing canvas
