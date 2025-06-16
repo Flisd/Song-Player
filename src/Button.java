@@ -357,12 +357,6 @@ public class Button {
         }
     }
 
-    public void drawProgressBar(double progress, Color fillColor) {
-        int barWidth = (int) (this.width * Math.max(0, Math.min(1, progress)));
-        StdDraw.setPenColor(fillColor);
-        StdDraw.filledRectangle(this.x + barWidth / 2.0 - this.width / 2.0, this.y, barWidth, this.height/2);
-    }
-
     public void updateParticles() {
         for (Particle p : particles) {
             p.update();
