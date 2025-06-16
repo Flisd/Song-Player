@@ -18,10 +18,8 @@ public class Simulation {
 
     private boolean nextPressedLastFrame = false;
     private boolean prevPressedLastFrame = false;
-
     private long lastNextPrevClickTime = 0;
-
-
+    private long lastSkipRewindClickTime = 0;
     private long lastPlayButtonClickTime = 0;
 
     public Simulation() {
@@ -90,30 +88,41 @@ public class Simulation {
         NameOfArtist.draw();
 
 
-
-
         long currentTime = System.currentTimeMillis();
 
-// Next button edge detection
+
         boolean nextPressedNow = nextButton.isClicked();
         if (nextPressedNow && !nextPressedLastFrame) {
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
+
+                // Stop current song before switching
+                Song currentSong = album.getSong(album.currentSongIndex);
+                if (currentSong != null) {
+                    currentSong.stop();
+                }
+
                 album.next();
             }
         }
         nextPressedLastFrame = nextPressedNow;
 
-// Prev button edge detection
+
         boolean prevPressedNow = previousButton.isClicked();
         if (prevPressedNow && !prevPressedLastFrame) {
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
+
+                // Stop current song before switching
+                Song currentSong = album.getSong(album.currentSongIndex);
+                if (currentSong != null) {
+                    currentSong.stop();
+                }
+
                 album.previous();
             }
         }
         prevPressedLastFrame = prevPressedNow;
-
 
 
         Button durationButton = new Button(150, -200, 450, 40);
@@ -144,8 +153,42 @@ public class Simulation {
             }
         }
 
-        if(album.getSong(album.currentSongIndex).isPlayingSong()){
+        if (album.getSong(album.currentSongIndex).isPlayingSong()) {
             album.getSong(album.currentSongIndex).playSong();
         }
+
+        // Create skip and rewind buttons
+        Button rewindButton = new Button(50, -250, 100, 40, "<< 5s");
+        rewindButton.setGradient(Color.ORANGE, Color.RED);
+        rewindButton.update();
+        rewindButton.draw();
+
+        Button skipButton = new Button(250, -250, 100, 40, "5s >>");
+        skipButton.setGradient(Color.ORANGE, Color.RED);
+        skipButton.update();
+        skipButton.draw();
+
+        Song currentSong = album.getSong(album.currentSongIndex);
+
+        long currentTime2 = System.currentTimeMillis();
+
+        if (rewindButton.isClicked()) {
+            if (lastSkipRewindClickTime == 0 || currentTime2 - lastSkipRewindClickTime >= 500) {
+                lastSkipRewindClickTime = currentTime2;
+                int newTime = currentSong.getCurrentTime() - 5;
+                if (newTime < 0) newTime = 0;
+                currentSong.setCurrentTime(newTime);
+            }
+        }
+
+        if (skipButton.isClicked()) {
+            if (lastSkipRewindClickTime == 0 || currentTime2 - lastSkipRewindClickTime >= 500) {
+                lastSkipRewindClickTime = currentTime2;
+                int newTime = currentSong.getCurrentTime() + 5;
+                if (newTime > currentSong.getDuration()) newTime = currentSong.getDuration();
+                currentSong.setCurrentTime(newTime);
+            }
+        }
+
     }
 }

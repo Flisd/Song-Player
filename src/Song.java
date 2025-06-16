@@ -33,6 +33,7 @@ public class Song {
             clip.open(audioStream);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.err.println("Error loading audio: " + e.getMessage());
+            clip = null;
         }
     }
 
@@ -51,6 +52,7 @@ public class Song {
             clipMicrosecondPos = clip.getMicrosecondPosition();
             clip.stop();
             isPlaying = false;
+            currentTime = (int)(clipMicrosecondPos / 1_000_000L);
         }
     }
 
@@ -73,7 +75,7 @@ public class Song {
         currentTime = 0;
     }
 
-    // Called from simulation loop every frame
+    // Called every frame to update currentTime for UI or logic
     public void updateCurrentTime() {
         if (!isPlaying) return;
 
@@ -97,6 +99,28 @@ public class Song {
     public int getCurrentTime() { return currentTime; }
     public boolean isPlayingSong() { return isPlaying; }
 
+    // Set current playback position and move clip position accordingly
+    public void setCurrentTime(int seconds) {
+        if (clip == null) return;
+
+        if (seconds < 0) {
+            seconds = 0;
+        } else if (seconds > duration) {
+            seconds = duration;
+        }
+        currentTime = seconds;
+        clipMicrosecondPos = seconds * 1_000_000L;
+        clip.setMicrosecondPosition(clipMicrosecondPos);
+        if (isPlaying) {
+            clip.start();
+            lastUpdateMillis = System.currentTimeMillis();
+        }
+    }
+
+    // Empty playSong method to keep your existing call structure (optional)
     public void playSong() {
+        if (clip != null && !isPlaying) {
+            resume();
+        }
     }
 }
