@@ -16,7 +16,7 @@ public class Album {
     public Album() {
         loadSongsFromFile();
 
-        if (songs.size() == 0) {
+        if (songs.isEmpty()) {
             System.err.println("No songs found in " + songPath);
             return;
         }

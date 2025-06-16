@@ -38,13 +38,13 @@ public class Song {
     }
 
     public void togglePlay() {
-        if (clip == null) return;
-
-        if (isPlaying) {
+        if (clip == null)
+            return;
+        if (isPlaying)
             pause();
-        } else {
+        else
             resume();
-        }
+
     }
 
     public void pause() {
@@ -52,7 +52,7 @@ public class Song {
             clipMicrosecondPos = clip.getMicrosecondPosition();
             clip.stop();
             isPlaying = false;
-            currentTime = (int)(clipMicrosecondPos / 1_000_000L);
+            currentTime = (int) (clipMicrosecondPos / 1_000_000L);
         }
     }
 
@@ -85,29 +85,48 @@ public class Song {
             lastUpdateMillis = now;
         }
 
-        if (currentTime >= duration) {
+        if (currentTime >= duration)
             stop();
-        }
+
     }
 
-    // --- Getters ---
-    public String getNameOfSong() { return nameOfSong; }
-    public String getArtist() { return artist; }
-    public String getCurrentImagePathName() { return currentImagePathName; }
-    public String getCurrentAudioPathName() { return currentAudioPathName; }
-    public int getDuration() { return duration; }
-    public int getCurrentTime() { return currentTime; }
-    public boolean isPlayingSong() { return isPlaying; }
 
-    // Set current playback position and move clip position accordingly
+    public String getNameOfSong() {
+        return nameOfSong;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getCurrentImagePathName() {
+        return currentImagePathName;
+    }
+
+    public String getCurrentAudioPathName() {
+        return currentAudioPathName;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
+
+    public boolean isPlayingSong() {
+        return isPlaying;
+    }
+
     public void setCurrentTime(int seconds) {
         if (clip == null) return;
 
-        if (seconds < 0) {
+        if (seconds < 0)
             seconds = 0;
-        } else if (seconds > duration) {
+        else if (seconds > duration)
             seconds = duration;
-        }
+
         currentTime = seconds;
         clipMicrosecondPos = seconds * 1_000_000L;
         clip.setMicrosecondPosition(clipMicrosecondPos);
@@ -117,10 +136,8 @@ public class Song {
         }
     }
 
-    // Empty playSong method to keep your existing call structure (optional)
     public void playSong() {
-        if (clip != null && !isPlaying) {
+        if (clip != null && !isPlaying)
             resume();
-        }
     }
 }

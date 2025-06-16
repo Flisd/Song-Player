@@ -1,4 +1,3 @@
-import javax.xml.namespace.QName;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -33,8 +32,6 @@ public class Simulation {
         circles.add(new Circle(123, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
         circles.add(new Circle(141, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
         circles.add(new Circle(162, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
-        //circles.add(new Circle(186, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
-        //ball = new Ball(0, 0, 10, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
 
         bars.add(new Bars(250, 180, 20, 350, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
         bars.add(new Bars(280, 180, 20, 350, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
@@ -96,11 +93,10 @@ public class Simulation {
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 
-                // Stop current song before switching
                 Song currentSong = album.getSong(album.currentSongIndex);
-                if (currentSong != null) {
+                if (currentSong != null)
                     currentSong.stop();
-                }
+
 
                 album.next();
             }
@@ -113,11 +109,10 @@ public class Simulation {
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 
-                // Stop current song before switching
                 Song currentSong = album.getSong(album.currentSongIndex);
-                if (currentSong != null) {
+                if (currentSong != null)
                     currentSong.stop();
-                }
+
 
                 album.previous();
             }
@@ -157,7 +152,6 @@ public class Simulation {
             album.getSong(album.currentSongIndex).playSong();
         }
 
-        // Create skip and rewind buttons
         Button rewindButton = new Button(50, -250, 100, 40, "<< 5s");
         rewindButton.setGradient(Color.ORANGE, Color.RED);
         rewindButton.update();
@@ -176,7 +170,8 @@ public class Simulation {
             if (lastSkipRewindClickTime == 0 || currentTime2 - lastSkipRewindClickTime >= 500) {
                 lastSkipRewindClickTime = currentTime2;
                 int newTime = currentSong.getCurrentTime() - 5;
-                if (newTime < 0) newTime = 0;
+                if (newTime < 0)
+                    newTime = 0;
                 currentSong.setCurrentTime(newTime);
             }
         }
@@ -185,7 +180,8 @@ public class Simulation {
             if (lastSkipRewindClickTime == 0 || currentTime2 - lastSkipRewindClickTime >= 500) {
                 lastSkipRewindClickTime = currentTime2;
                 int newTime = currentSong.getCurrentTime() + 5;
-                if (newTime > currentSong.getDuration()) newTime = currentSong.getDuration();
+                if (newTime > currentSong.getDuration())
+                    newTime = currentSong.getDuration();
                 currentSong.setCurrentTime(newTime);
             }
         }
