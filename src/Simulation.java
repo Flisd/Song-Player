@@ -21,6 +21,9 @@ public class Simulation {
     private long lastSkipRewindClickTime = 0;
     private long lastPlayButtonClickTime = 0;
 
+    private Color startButtonColor = new Color(104,161,190);
+    private Color endButtonColor = new Color(168, 203, 227); // Red
+
     public Simulation() {
 
         circles.add(new Circle(55, 0, 270, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
@@ -62,12 +65,13 @@ public class Simulation {
         StdDraw.setFont(font);
 
         Button nextButton = new Button(-150, -300, 70, 50, "Next");
-        nextButton.setGradient(Color.ORANGE, Color.RED);
+        nextButton.setGradient(startButtonColor, endButtonColor);
         nextButton.update();
         nextButton.draw();
 
+
         Button previousButton = new Button(-250, -300, 70, 50, "Prev");
-        previousButton.setGradient(Color.ORANGE, Color.RED);
+        previousButton.setGradient(startButtonColor, endButtonColor);
         previousButton.update();
         previousButton.draw();
 
@@ -75,12 +79,12 @@ public class Simulation {
         StdDraw.setFont(font);
 
         Button NameOfSong = new Button(125, -75, 450, 40, album.getNextSong().getNameOfSong().substring(0, Math.min(album.getNextSong().getNameOfSong().length(), 30)));
-        NameOfSong.setGradient(Color.ORANGE, Color.RED);
+        NameOfSong.setGradient(startButtonColor, endButtonColor);
         NameOfSong.update();
         NameOfSong.draw();
 
         Button NameOfArtist = new Button(13, -125, 225, 40, album.getNextSong().getArtist().substring(0, Math.min(album.getNextSong().getArtist().length(), 15)));
-        NameOfArtist.setGradient(Color.ORANGE, Color.RED);
+        NameOfArtist.setGradient(startButtonColor, endButtonColor);
         NameOfArtist.update();
         NameOfArtist.draw();
 
@@ -121,7 +125,7 @@ public class Simulation {
 
 
         Button durationButton = new Button(150, -200, 450, 40);
-        durationButton.setGradient(Color.ORANGE, Color.RED);
+        durationButton.setGradient(startButtonColor, endButtonColor);
         durationButton.update();
         durationButton.draw();
 
@@ -135,7 +139,7 @@ public class Simulation {
         album.getNextSong().updateCurrentTime();
 
         Button playButton = new Button(150, -250, 70, 40, "▷");
-        playButton.setGradient(Color.ORANGE, Color.RED);
+        playButton.setGradient(startButtonColor, endButtonColor);
         playButton.update();
         playButton.draw();
 
@@ -153,12 +157,12 @@ public class Simulation {
         }
 
         Button rewindButton = new Button(50, -250, 100, 40, "<< 5s");
-        rewindButton.setGradient(Color.ORANGE, Color.RED);
+        rewindButton.setGradient(startButtonColor, endButtonColor);
         rewindButton.update();
         rewindButton.draw();
 
         Button skipButton = new Button(250, -250, 100, 40, "5s >>");
-        skipButton.setGradient(Color.ORANGE, Color.RED);
+        skipButton.setGradient(startButtonColor, endButtonColor);
         skipButton.update();
         skipButton.draw();
 
