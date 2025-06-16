@@ -85,9 +85,9 @@ public class Simulation {
 
 
         if (nextButton.isClicked())
-            album.getNextSong().next();
+            album.next();
         else if (previousButton.isClicked())
-            album.getNextSong().previous();
+            album.previous();
 
         Button durationButton = new Button(150, -200, 450, 40);
         durationButton.setGradient(Color.ORANGE, Color.RED);

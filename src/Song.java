@@ -7,9 +7,9 @@ public class Song {
     private String artist;
     private String currentImagePathName;
     private String currentAudioPathName;
-    private int duration; // seconds, from metadata
+    private int duration; // in seconds
 
-    private int currentTime = 0; // for visual tracking
+    private int currentTime = 0;
     private long lastUpdateMillis = 0;
 
     private boolean isPlaying = false;
@@ -32,8 +32,7 @@ public class Song {
             clip = AudioSystem.getClip();
             clip.open(audioStream);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-            System.out.println("Error loading audio: " + currentAudioPathName);
+            System.err.println("Error loading audio: " + e.getMessage());
         }
     }
 
@@ -59,8 +58,8 @@ public class Song {
         if (clip != null && !isPlaying) {
             clip.setMicrosecondPosition(clipMicrosecondPos);
             clip.start();
-            isPlaying = true;
             lastUpdateMillis = System.currentTimeMillis();
+            isPlaying = true;
         }
     }
 
@@ -69,13 +68,15 @@ public class Song {
             clip.stop();
             clip.setMicrosecondPosition(0);
             clipMicrosecondPos = 0;
-            isPlaying = false;
-            currentTime = 0;
         }
+        isPlaying = false;
+        currentTime = 0;
     }
 
-    public void update() {
+    // Called from simulation loop every frame
+    public void updateCurrentTime() {
         if (!isPlaying) return;
+
         long now = System.currentTimeMillis();
         if (now - lastUpdateMillis >= 1000) {
             currentTime++;
@@ -83,28 +84,25 @@ public class Song {
         }
 
         if (currentTime >= duration) {
-            stop(); // stop when duration exceeded
+            stop();
         }
     }
 
-    // Getters
-    public boolean isPlayingSong() { return isPlaying; }
-    public int getCurrentTime() { return currentTime; }
-    public int getDuration() { return duration; }
+    // --- Getters ---
     public String getNameOfSong() { return nameOfSong; }
     public String getArtist() { return artist; }
     public String getCurrentImagePathName() { return currentImagePathName; }
     public String getCurrentAudioPathName() { return currentAudioPathName; }
+    public int getDuration() { return duration; }
+    public int getCurrentTime() { return currentTime; }
+    public boolean isPlayingSong() { return isPlaying; }
 
-    public void next() {
+    public void playSong() {
     }
 
     public void previous() {
     }
 
-    public void updateCurrentTime() {
-    }
-
-    public void playSong() {
+    public void next() {
     }
 }
