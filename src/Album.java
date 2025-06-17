@@ -104,5 +104,7 @@ public class Album {
         return false;
     }
 
-
+    public String getCurrentImagePathName() {
+        return currentImagePathName;
+    }
 }

@@ -29,7 +29,17 @@ public class Simulation {
 
     StringBuilder songName = new StringBuilder();
 
+    public Button[] favoriteSongButtons;
+
+    String imagePath = album.getCurrentImagePathName();
+
+    HashSet<String> nameOfSongsFavorite = new HashSet<>();
+
     String songToSearch = "";
+
+    boolean allFull = false;
+
+    boolean buttonOneDrawImage, buttonTwoDrawImage, buttonThreeDrawImage, buttonFourDrawImage, buttonFiveDrawImage, buttonSixDrawImage;
 
     public Simulation() {
 
@@ -49,12 +59,33 @@ public class Simulation {
         bars.add(new Bars(340, 180, 20, 350, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
 
         searchButton = new Button(0, 400, 700, 50, "Search Song: ");
+
+        favoriteSongButtons = new Button[6];
+        favoriteSongButtons[0] = new Button(-300, -400, 70, 70);
+        favoriteSongButtons[1] = new Button(-175, -400, 70, 70);
+        favoriteSongButtons[2] = new Button(-50, -400, 70, 70);
+        favoriteSongButtons[3] = new Button(75, -400, 70, 70);
+        favoriteSongButtons[4] = new Button(200, -400, 70, 70);
+        favoriteSongButtons[5] = new Button(325, -400, 70, 70);
+
+        for (int i = 0; i < favoriteSongButtons.length; i++)
+            favoriteSongButtons[i].setGradient(startButtonColor, endButtonColor);
+
+
+        favoriteSongButtons[0].setBackground(new Color(200, 200, 255));
+        favoriteSongButtons[1].setBackground(new Color(220, 220, 240));
+        favoriteSongButtons[2].setBackground(new Color(180, 210, 230));
+        favoriteSongButtons[3].setBackground(new Color(210, 230, 250));
+        favoriteSongButtons[4].setBackground(new Color(190, 220, 240));
+        favoriteSongButtons[5].setBackground(new Color(170, 210, 220));
     }
 
     public void run() {
         StdDraw.clear(backgroundColor);
 
         setUpBarAndCircle();
+
+        favoriteButton();
 
         setUpPictures();
 
@@ -67,7 +98,86 @@ public class Simulation {
         searchSong();
     }
 
-    public void playButton(){
+    public void favoriteButton() {
+        Button favoriteButton = new Button(-350, -150, 50, 50, "★");
+        favoriteButton.setGradient(startButtonColor, endButtonColor);
+        favoriteButton.update();
+        favoriteButton.draw();
+
+        for (int i = 0; i < favoriteSongButtons.length; i++) {
+            favoriteSongButtons[i].update();
+            favoriteSongButtons[i].draw();
+        }
+
+        if (favoriteButton.clicked) {
+            if (!favoriteSongButtons[0].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath) && !allFull) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[0].setText(".");
+                favoriteSongButtons[0].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonOneDrawImage = true;
+            }
+            if (!favoriteSongButtons[1].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[1].setText(".");
+                favoriteSongButtons[1].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonTwoDrawImage = true;
+            }
+            if (!favoriteSongButtons[2].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[2].setText(".");
+                favoriteSongButtons[2].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonThreeDrawImage = true;
+            }
+            if (!favoriteSongButtons[3].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[3].setText(".");
+                favoriteSongButtons[3].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonFourDrawImage = true;
+            }
+            if (!favoriteSongButtons[4].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[4].setText(".");
+                favoriteSongButtons[4].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonFiveDrawImage = true;
+            }
+            if (!favoriteSongButtons[5].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+                nameOfSongsFavorite.add(imagePath);
+                favoriteSongButtons[5].setText(".");
+                favoriteSongButtons[5].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                buttonSixDrawImage = true;
+                allFull = true;
+            }
+        }
+
+        if (buttonOneDrawImage)
+            StdDraw.picture(favoriteSongButtons[0].getX(), favoriteSongButtons[0].getY(), "res/" + favoriteSongButtons[0].getComment().split("~")[0], 70, 70);
+        if (buttonOneDrawImage)
+            StdDraw.picture(favoriteSongButtons[0].getX(), favoriteSongButtons[0].getY(), "res/" + favoriteSongButtons[0].getComment().split("~")[0], 70, 70);
+        if (buttonTwoDrawImage)
+            StdDraw.picture(favoriteSongButtons[1].getX(), favoriteSongButtons[1].getY(), "res/" + favoriteSongButtons[1].getComment().split("~")[0], 70, 70);
+        if (buttonThreeDrawImage)
+            StdDraw.picture(favoriteSongButtons[2].getX(), favoriteSongButtons[2].getY(), "res/" + favoriteSongButtons[2].getComment().split("~")[0], 70, 70);
+        if (buttonFourDrawImage)
+            StdDraw.picture(favoriteSongButtons[3].getX(), favoriteSongButtons[3].getY(), "res/" + favoriteSongButtons[3].getComment().split("~")[0], 70, 70);
+        if (buttonFiveDrawImage)
+            StdDraw.picture(favoriteSongButtons[4].getX(), favoriteSongButtons[4].getY(), "res/" + favoriteSongButtons[4].getComment().split("~")[0], 70, 70);
+        if (buttonSixDrawImage)
+            StdDraw.picture(favoriteSongButtons[5].getX(), favoriteSongButtons[5].getY(), "res/" + favoriteSongButtons[5].getComment().split("~")[0], 70, 70);
+
+        for (int i = 0; i < favoriteSongButtons.length; i++) {
+            if (favoriteSongButtons[i].isClicked()) {
+                Song oldSong = album.getNextSong();
+                album.searchSong(favoriteSongButtons[i].getComment().split("~")[1]);
+                if (oldSong != null && oldSong.isPlayingSong()) {
+                    oldSong.stop();
+                }
+            }
+        }
+
+        imagePath = album.getCurrentImagePathName();
+    }
+
+    public void playButton() {
         Button playButton = new Button(150, -250, 70, 40, "▷");
         playButton.setGradient(startButtonColor, endButtonColor);
         playButton.update();
@@ -86,7 +196,7 @@ public class Simulation {
             album.getSong(album.currentSongIndex).playSong();
     }
 
-    public void durationButtonStuff(){
+    public void durationButtonStuff() {
         Button durationButton = new Button(150, -200, 450, 40);
         durationButton.setGradient(startButtonColor, endButtonColor);
         durationButton.update();
@@ -102,7 +212,7 @@ public class Simulation {
         album.getNextSong().updateCurrentTime();
     }
 
-    public void setUpPictures(){
+    public void setUpPictures() {
         StdDraw.picture(-300, 200, "res/" + album.nextImagePathName, 150, 150);
         StdDraw.picture(-225, 125, "res/" + album.nextNextImagePathName, 70, 70);
         StdDraw.picture(-200, -150, "res/" + album.currentImagePathName, 200, 200);
@@ -171,7 +281,7 @@ public class Simulation {
         prevPressedLastFrame = prevPressedNow;
     }
 
-    public void setUpSkipAndRewindButtons(){
+    public void setUpSkipAndRewindButtons() {
         Button rewindButton = new Button(50, -250, 100, 40, "<< 5s");
         rewindButton.setGradient(startButtonColor, endButtonColor);
         rewindButton.update();
@@ -245,9 +355,8 @@ public class Simulation {
             if (!album.searchSong(songToSearch)) {
                 songName.append("Song not found: ").append(songToSearch);
                 searchButton.setText(songToSearch);
-            } else
-                if (oldSong != null)
-                    oldSong.stop();
+            } else if (oldSong != null)
+                oldSong.stop();
 
         }
 

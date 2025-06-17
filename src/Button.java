@@ -7,6 +7,7 @@ public class Button {
     int y;
     int height;
     int width;
+    String comment;
 
     boolean previousMousePressed = false;
     boolean enabled = true;
@@ -87,6 +88,14 @@ public class Button {
         }
 
         StdDraw.polygon(xPoints, yPoints);
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
 
