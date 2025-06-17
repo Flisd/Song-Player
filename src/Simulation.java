@@ -72,11 +72,17 @@ public class Simulation {
 
 
         favoriteSongButtons[0].setBackground(new Color(200, 200, 255));
+        favoriteSongButtons[0].setEnabled(false);
         favoriteSongButtons[1].setBackground(new Color(220, 220, 240));
+        favoriteSongButtons[1].setEnabled(false);
         favoriteSongButtons[2].setBackground(new Color(180, 210, 230));
+        favoriteSongButtons[2].setEnabled(false);
         favoriteSongButtons[3].setBackground(new Color(210, 230, 250));
+        favoriteSongButtons[3].setEnabled(false);
         favoriteSongButtons[4].setBackground(new Color(190, 220, 240));
+        favoriteSongButtons[4].setEnabled(false);
         favoriteSongButtons[5].setBackground(new Color(170, 210, 220));
+        favoriteSongButtons[5].setEnabled(false);
 
         removeFavoriteSongButtons = new Button[6];
         int height = 20;
@@ -135,36 +141,37 @@ public class Simulation {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[0].setText(".");
                 favoriteSongButtons[0].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[0].setEnabled(true);
                 buttonOneDrawImage = true;
-            }
-            if (!favoriteSongButtons[1].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+            } else if (!favoriteSongButtons[1].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[1].setText(".");
                 favoriteSongButtons[1].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[1].setEnabled(true);
                 buttonTwoDrawImage = true;
-            }
-            if (!favoriteSongButtons[2].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+            } else if (!favoriteSongButtons[2].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[2].setText(".");
                 favoriteSongButtons[2].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[2].setEnabled(true);
                 buttonThreeDrawImage = true;
-            }
-            if (!favoriteSongButtons[3].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+            } else if (!favoriteSongButtons[3].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[3].setText(".");
                 favoriteSongButtons[3].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[3].setEnabled(true);
                 buttonFourDrawImage = true;
-            }
-            if (!favoriteSongButtons[4].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+            } else if (!favoriteSongButtons[4].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[4].setText(".");
                 favoriteSongButtons[4].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[4].setEnabled(true);
                 buttonFiveDrawImage = true;
-            }
-            if (!favoriteSongButtons[5].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
+            } else if (!favoriteSongButtons[5].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[5].setText(".");
                 favoriteSongButtons[5].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
+                favoriteSongButtons[5].setEnabled(true);
                 buttonSixDrawImage = true;
             }
         }
@@ -174,13 +181,26 @@ public class Simulation {
                 favoriteSongButtons[i].setText("");
                 favoriteSongButtons[i].setComment("");
                 nameOfSongsFavorite.remove(favoriteSongButtons[i].getComment().split("~")[0]);
+                favoriteSongButtons[i].setEnabled(false);
                 switch (i) {
-                    case 0: buttonOneDrawImage = false; break;
-                    case 1: buttonTwoDrawImage = false; break;
-                    case 2: buttonThreeDrawImage = false; break;
-                    case 3: buttonFourDrawImage = false; break;
-                    case 4: buttonFiveDrawImage = false; break;
-                    case 5: buttonSixDrawImage = false; break;
+                    case 0:
+                        buttonOneDrawImage = false;
+                        break;
+                    case 1:
+                        buttonTwoDrawImage = false;
+                        break;
+                    case 2:
+                        buttonThreeDrawImage = false;
+                        break;
+                    case 3:
+                        buttonFourDrawImage = false;
+                        break;
+                    case 4:
+                        buttonFiveDrawImage = false;
+                        break;
+                    case 5:
+                        buttonSixDrawImage = false;
+                        break;
                 }
             }
         }
