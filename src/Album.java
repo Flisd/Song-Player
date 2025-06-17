@@ -88,4 +88,21 @@ public class Album {
     public Map<Integer, Song> getAllSongs() {
         return songs;
     }
+
+    public boolean searchSong(String songToSearch) {
+        for (Song song : songs.values()) {
+            if (song.getNameOfSong().equalsIgnoreCase(songToSearch)) {
+                currentSongIndex = songs.entrySet().stream()
+                        .filter(entry -> entry.getValue().equals(song))
+                        .map(Map.Entry::getKey)
+                        .findFirst()
+                        .orElse(currentSongIndex);
+                updateImagePaths();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

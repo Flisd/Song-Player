@@ -1,9 +1,10 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
 public class Simulation {
-    public static int size = 800;
+    public static int size = 900;
 
     public static Color backgroundColor = Color.black;
 
@@ -21,8 +22,14 @@ public class Simulation {
     private long lastSkipRewindClickTime = 0;
     private long lastPlayButtonClickTime = 0;
 
-    private Color startButtonColor = new Color(104,161,190);
+    public Button searchButton;
+
+    private Color startButtonColor = new Color(104, 161, 190);
     private Color endButtonColor = new Color(168, 203, 227); // Red
+
+    StringBuilder songName = new StringBuilder();
+
+    String songToSearch = "";
 
     public Simulation() {
 
@@ -41,6 +48,7 @@ public class Simulation {
         bars.add(new Bars(310, 180, 20, 350, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
         bars.add(new Bars(340, 180, 20, 350, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))));
 
+        searchButton = new Button(0, 400, 700, 50, "Search Song: ");
     }
 
     public void run() {
@@ -189,6 +197,48 @@ public class Simulation {
                 currentSong.setCurrentTime(newTime);
             }
         }
+
+        searchSong();
+
+    }
+
+    public void searchSong() {
+        searchButton.setGradient(startButtonColor, endButtonColor);
+        boolean enterPressed = false;
+        while (StdDraw.hasNextKeyTyped()) {
+            char temp = StdDraw.nextKeyTyped();
+            char backspace = '\b';
+            char enter = '\n';
+
+            if (temp == backspace) {
+                if (!songName.isEmpty())
+                    songName.deleteCharAt(songName.length() - 1);
+            } else if (temp == enter) {
+                enterPressed = true;
+            } else if (songName.length() <= 40) {
+                songName.append(temp);
+            }
+        }
+
+        if (enterPressed) {
+            songToSearch = songName.toString();
+            System.out.println("Searching for song: " + songToSearch);
+            songName = new StringBuilder();
+            Song oldSong = album.getNextSong();
+            if (!album.searchSong(songToSearch)) {
+                songName.append("Song not found: ").append(songToSearch);
+                searchButton.setText(songToSearch);
+            } else
+                if (oldSong != null)
+                    oldSong.stop();
+
+        }
+
+        searchButton.setText(songName.toString().isEmpty() ? "Search Song: " : songName.toString());
+        searchButton.update();
+        searchButton.draw();
+
+
 
     }
 }
