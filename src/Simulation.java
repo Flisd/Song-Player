@@ -6,7 +6,7 @@ import java.util.List;
 public class Simulation {
     public static int size = 900;
 
-    public static Color backgroundColor = Color.black;
+    public static Color backgroundColor = new Color(12, 1, 23);
 
     private List<Circle> circles = new ArrayList<>();
 
@@ -52,18 +52,57 @@ public class Simulation {
     }
 
     public void run() {
-
         StdDraw.clear(backgroundColor);
-        for (Circle circle : circles) {
-            circle.autoUpdateAnglesRandomly();
-            circle.draw();
+
+        setUpBarAndCircle();
+
+        setUpPictures();
+
+        durationButtonStuff();
+
+        playButton();
+
+        setUpSkipAndRewindButtons();
+
+        searchSong();
+    }
+
+    public void playButton(){
+        Button playButton = new Button(150, -250, 70, 40, "▷");
+        playButton.setGradient(startButtonColor, endButtonColor);
+        playButton.update();
+        playButton.draw();
+
+        if (playButton.isClicked()) {
+            long currentTime1 = System.currentTimeMillis();
+            if (lastPlayButtonClickTime == 0 || currentTime1 - lastPlayButtonClickTime >= 500) {
+                lastPlayButtonClickTime = currentTime1;
+                album.getNextSong().togglePlay();
+                System.out.println("Play/Pause clicked. is playing: " + album.getNextSong().isPlayingSong());
+            }
         }
 
+        if (album.getSong(album.currentSongIndex).isPlayingSong())
+            album.getSong(album.currentSongIndex).playSong();
+    }
 
-        for (Bars bar : bars) {
-            bar.draw();
-        }
+    public void durationButtonStuff(){
+        Button durationButton = new Button(150, -200, 450, 40);
+        durationButton.setGradient(startButtonColor, endButtonColor);
+        durationButton.update();
+        durationButton.draw();
 
+        int maxHalfWidth = 220;
+        double progress = Math.min(album.getNextSong().getCurrentTime() / (double) album.getNextSong().getDuration(), 1.0);
+        double realHalfWidth = progress * maxHalfWidth;
+        double centerX = 150 - maxHalfWidth + realHalfWidth;
+        StdDraw.setPenColor(new Color(239, 223, 223, 169));
+        StdDraw.filledRectangle(centerX, -200, realHalfWidth, 15);
+
+        album.getNextSong().updateCurrentTime();
+    }
+
+    public void setUpPictures(){
         StdDraw.picture(-300, 200, "res/" + album.nextImagePathName, 150, 150);
         StdDraw.picture(-225, 125, "res/" + album.nextNextImagePathName, 70, 70);
         StdDraw.picture(-200, -150, "res/" + album.currentImagePathName, 200, 200);
@@ -130,40 +169,9 @@ public class Simulation {
             }
         }
         prevPressedLastFrame = prevPressedNow;
+    }
 
-
-        Button durationButton = new Button(150, -200, 450, 40);
-        durationButton.setGradient(startButtonColor, endButtonColor);
-        durationButton.update();
-        durationButton.draw();
-
-        int maxHalfWidth = 220;
-        double progress = Math.min(album.getNextSong().getCurrentTime() / (double) album.getNextSong().getDuration(), 1.0);
-        double realHalfWidth = progress * maxHalfWidth;
-        double centerX = 150 - maxHalfWidth + realHalfWidth;
-        StdDraw.setPenColor(new Color(239, 223, 223, 169));
-        StdDraw.filledRectangle(centerX, -200, realHalfWidth, 15);
-
-        album.getNextSong().updateCurrentTime();
-
-        Button playButton = new Button(150, -250, 70, 40, "▷");
-        playButton.setGradient(startButtonColor, endButtonColor);
-        playButton.update();
-        playButton.draw();
-
-        if (playButton.isClicked()) {
-            long currentTime1 = System.currentTimeMillis();
-            if (lastPlayButtonClickTime == 0 || currentTime1 - lastPlayButtonClickTime >= 500) {
-                lastPlayButtonClickTime = currentTime1;
-                album.getNextSong().togglePlay();
-                System.out.println("Play/Pause clicked. is playing: " + album.getNextSong().isPlayingSong());
-            }
-        }
-
-        if (album.getSong(album.currentSongIndex).isPlayingSong()) {
-            album.getSong(album.currentSongIndex).playSong();
-        }
-
+    public void setUpSkipAndRewindButtons(){
         Button rewindButton = new Button(50, -250, 100, 40, "<< 5s");
         rewindButton.setGradient(startButtonColor, endButtonColor);
         rewindButton.update();
@@ -197,9 +205,18 @@ public class Simulation {
                 currentSong.setCurrentTime(newTime);
             }
         }
+    }
 
-        searchSong();
+    public void setUpBarAndCircle() {
+        for (Circle circle : circles) {
+            circle.autoUpdateAnglesRandomly();
+            circle.draw();
+        }
 
+
+        for (Bars bar : bars) {
+            bar.draw();
+        }
     }
 
     public void searchSong() {
@@ -237,8 +254,5 @@ public class Simulation {
         searchButton.setText(songName.toString().isEmpty() ? "Search Song: " : songName.toString());
         searchButton.update();
         searchButton.draw();
-
-
-
     }
 }
