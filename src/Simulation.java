@@ -30,14 +30,13 @@ public class Simulation {
     StringBuilder songName = new StringBuilder();
 
     public Button[] favoriteSongButtons;
+    public Button[] removeFavoriteSongButtons;
 
     String imagePath = album.getCurrentImagePathName();
 
     HashSet<String> nameOfSongsFavorite = new HashSet<>();
 
     String songToSearch = "";
-
-    boolean allFull = false;
 
     boolean buttonOneDrawImage, buttonTwoDrawImage, buttonThreeDrawImage, buttonFourDrawImage, buttonFiveDrawImage, buttonSixDrawImage;
 
@@ -68,8 +67,8 @@ public class Simulation {
         favoriteSongButtons[4] = new Button(200, -400, 70, 70);
         favoriteSongButtons[5] = new Button(325, -400, 70, 70);
 
-        for (int i = 0; i < favoriteSongButtons.length; i++)
-            favoriteSongButtons[i].setGradient(startButtonColor, endButtonColor);
+        for (Button favoriteSongButton : favoriteSongButtons)
+            favoriteSongButton.setGradient(startButtonColor, endButtonColor);
 
 
         favoriteSongButtons[0].setBackground(new Color(200, 200, 255));
@@ -78,6 +77,23 @@ public class Simulation {
         favoriteSongButtons[3].setBackground(new Color(210, 230, 250));
         favoriteSongButtons[4].setBackground(new Color(190, 220, 240));
         favoriteSongButtons[5].setBackground(new Color(170, 210, 220));
+
+        removeFavoriteSongButtons = new Button[6];
+        int height = 20;
+        int yValue = -350;
+        removeFavoriteSongButtons[0] = new Button(-300, yValue, 70, height, "🗑️");
+        removeFavoriteSongButtons[1] = new Button(-175, yValue, 70, height, "🗑️");
+        removeFavoriteSongButtons[2] = new Button(-50, yValue, 70, height, "🗑️");
+        removeFavoriteSongButtons[3] = new Button(75, yValue, 70, height, "🗑️");
+        removeFavoriteSongButtons[4] = new Button(200, yValue, 70, height, "🗑️");
+        removeFavoriteSongButtons[5] = new Button(325, yValue, 70, height, "🗑️");
+
+        Color removeButtonColorStart = new Color(255, 100, 100);
+        Color removeButtonColorEnd = new Color(255, 150, 150);
+
+        for (Button removeFavoriteSongButton : removeFavoriteSongButtons)
+            removeFavoriteSongButton.setGradient(removeButtonColorStart, removeButtonColorEnd);
+
     }
 
     public void run() {
@@ -104,13 +120,18 @@ public class Simulation {
         favoriteButton.update();
         favoriteButton.draw();
 
-        for (int i = 0; i < favoriteSongButtons.length; i++) {
-            favoriteSongButtons[i].update();
-            favoriteSongButtons[i].draw();
+        for (Button favoriteSongButton : favoriteSongButtons) {
+            favoriteSongButton.update();
+            favoriteSongButton.draw();
+        }
+
+        for (Button removeFavoriteSongButton : removeFavoriteSongButtons) {
+            removeFavoriteSongButton.update();
+            removeFavoriteSongButton.draw();
         }
 
         if (favoriteButton.clicked) {
-            if (!favoriteSongButtons[0].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath) && !allFull) {
+            if (!favoriteSongButtons[0].getText().equals(".") && !nameOfSongsFavorite.contains(imagePath)) {
                 nameOfSongsFavorite.add(imagePath);
                 favoriteSongButtons[0].setText(".");
                 favoriteSongButtons[0].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
@@ -145,7 +166,22 @@ public class Simulation {
                 favoriteSongButtons[5].setText(".");
                 favoriteSongButtons[5].setComment(imagePath + "~" + album.getNextSong().getNameOfSong());
                 buttonSixDrawImage = true;
-                allFull = true;
+            }
+        }
+
+        for (int i = 0; i < removeFavoriteSongButtons.length; i++) {
+            if (removeFavoriteSongButtons[i].isClicked()) {
+                favoriteSongButtons[i].setText("");
+                favoriteSongButtons[i].setComment("");
+                nameOfSongsFavorite.remove(favoriteSongButtons[i].getComment().split("~")[0]);
+                switch (i) {
+                    case 0: buttonOneDrawImage = false; break;
+                    case 1: buttonTwoDrawImage = false; break;
+                    case 2: buttonThreeDrawImage = false; break;
+                    case 3: buttonFourDrawImage = false; break;
+                    case 4: buttonFiveDrawImage = false; break;
+                    case 5: buttonSixDrawImage = false; break;
+                }
             }
         }
 
