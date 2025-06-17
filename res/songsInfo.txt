@@ -3,3 +3,7 @@
 3~Summer of '69~Bryan Adams~summer.png~216~Summer of '69.wav
 4~Stronger~Kanye West~graduation1.png~312~Stronger.wav
 5~I wonder~Kanye West~graduation.png~243~I Wonder.wav
+6~Cinderella~Future~cinderella.png~170~Cinderella.wav
+7~Rhythm of the Rain~The Cascades~cascade.png~146~Rhythm of the Rain.wav
+8~Cruel World~Josh Homme~cruel.png~218~Cruel World.wav
+9~Space Cadet~Metro Boomin~cadet.png~203~Space Cadet.wav
