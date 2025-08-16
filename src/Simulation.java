@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
@@ -392,30 +391,25 @@ public class Simulation {
             char temp = StdDraw.nextKeyTyped();
             char backspace = '\b';
             char enter = '\n';
-
             if (temp == backspace) {
-                if (!songName.isEmpty())
-                    songName.deleteCharAt(songName.length() - 1);
+                if (!songName.isEmpty()) songName.deleteCharAt(songName.length() - 1);
             } else if (temp == enter) {
                 enterPressed = true;
             } else if (songName.length() <= 40) {
                 songName.append(temp);
             }
         }
-
         if (enterPressed) {
             songToSearch = songName.toString();
             System.out.println("Searching for song: " + songToSearch);
             songName = new StringBuilder();
             Song oldSong = album.getNextSong();
-            if (!album.searchSong(songToSearch)) {
+            if (!album.searchSong(songToSearch) && !album.searchSongNotExact(songToSearch)) {
                 songName.append("Song not found: ").append(songToSearch);
                 searchButton.setText(songToSearch);
             } else if (oldSong != null)
                 oldSong.stop();
-
         }
-
         searchButton.setText(songName.toString().isEmpty() ? "Search Song: " : songName.toString());
         searchButton.update();
         searchButton.draw();

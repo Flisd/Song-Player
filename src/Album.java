@@ -7,6 +7,7 @@ public class Album {
     public static String currentImagePathName;
     public static String nextImagePathName;
     public static String nextNextImagePathName;
+    private int totalNumOfSongs;
 
     private final HashMap<Integer, Song> songs = new HashMap<>();
     private final String songPath = "res/songsInfo.txt";
@@ -22,6 +23,10 @@ public class Album {
         }
 
         updateImagePaths();
+    }
+
+    public int getTotalNumOfSongs() {
+        return totalNumOfSongs;
     }
 
     private void loadSongsFromFile() {
@@ -41,6 +46,7 @@ public class Album {
 
                     Song song = new Song(nameOfSong, artist, imagePath, duration, audioPath);
                     songs.put(songIndex, song);
+                    totalNumOfSongs++;
                 }
             }
         } catch (Exception e) {
@@ -106,5 +112,22 @@ public class Album {
 
     public String getCurrentImagePathName() {
         return currentImagePathName;
+    }
+
+    public boolean searchSongNotExact(String songToSearch) {
+        if (songToSearch == null || songToSearch.isEmpty())
+            return false;
+
+        String lowerSearch = songToSearch.toLowerCase();
+        for (Map.Entry<Integer, Song> entry : songs.entrySet()) {
+            Song song = entry.getValue();
+            if (song.getNameOfSong().toLowerCase().contains(lowerSearch)) {
+                currentSongIndex = entry.getKey();
+                updateImagePaths();
+                return true;
+            }
+        }
+
+        return false;
     }
 }
