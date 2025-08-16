@@ -6,8 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="51b115f0-ecef-491d-984c-7bf6ca046b9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SongPlayer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SongPlayer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/cruel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/graduation1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/songsInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/songsInfo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Converter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Song.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +34,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2yYt1gQhOM55OESrlPdWSfJnqy4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,16 +49,20 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Tijil/OneDrive/Desktop/Java projects/SongPlayer/src",
+    "last_opened_file_path": "C:/Users/Tijil/OneDrive/Desktop/Java projects/SongPlayer/res",
     "onboarding.tips.debug.path": "C:/Users/Tijil/OneDrive/Desktop/Java projects/SongPlayer/src/Main.java",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.21264368"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tijil\OneDrive\Desktop\Java projects\SongPlayer\res" />
       <recent name="C:\Users\Tijil\OneDrive\Desktop\Java projects\SongPlayer\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
@@ -75,5 +88,15 @@
       <updated>1750023121356</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

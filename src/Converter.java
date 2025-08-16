@@ -7,17 +7,21 @@ public class Converter {
     private final File wavFolder;
 
     public Converter() {
-        // Set your folder path here
+        // WAV output folder
         this.wavFolder = new File("C:\\Users\\Tijil\\OneDrive\\Desktop\\Java projects\\SongPlayer\\WavFolder");
-        if (!wavFolder.exists())
+        if (!wavFolder.exists()) {
             wavFolder.mkdirs();
-
+        }
     }
 
-    // Convert MP3 to WAV inside WavFolder
-    public File createWav(String mp3FilePath) {
+    // Convert MP3 to WAV inside WavFolder, input MP3 assumed in res/
+    public File createWav(String mp3FileName) {
         try {
-            File mp3File = new File(mp3FilePath);
+            File mp3File = new File("res", mp3FileName); // looks in res/<mp3FileName>
+            if (!mp3File.exists()) {
+                throw new RuntimeException("MP3 file not found: " + mp3File.getAbsolutePath());
+            }
+
             String baseName = mp3File.getName().replaceAll("\\.mp3$", "");
             File wavFile = new File(wavFolder, baseName + ".wav");
 
@@ -42,6 +46,7 @@ public class Converter {
         }
     }
 
+    // Clear WAV folder
     public void clearWav() {
         File[] files = wavFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".wav"));
         if (files != null) {

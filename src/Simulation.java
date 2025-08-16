@@ -306,6 +306,7 @@ public class Simulation {
 
         boolean nextPressedNow = nextButton.isClicked();
         if (nextPressedNow && !nextPressedLastFrame) {
+            Song.converter.clearWav();
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 
@@ -322,6 +323,7 @@ public class Simulation {
 
         boolean prevPressedNow = previousButton.isClicked();
         if (prevPressedNow && !prevPressedLastFrame) {
+            Song.converter.clearWav();
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 

@@ -16,6 +16,8 @@ public class Song {
     private Clip clip;
     private long clipMicrosecondPos = 0;
 
+    public static Converter converter = new Converter();
+
     public Song(String nameOfSong, String artist, String currentImagePathName, int duration, String currentAudioPathName) {
         this.nameOfSong = nameOfSong;
         this.artist = artist;
@@ -27,7 +29,8 @@ public class Song {
 
     private void loadClip() {
         try {
-            File audioFile = new File("res/" + currentAudioPathName);
+            converter.createWav(getCurrentAudioPathNameMp3());
+            File audioFile = new File("WavFolder/" + currentAudioPathName);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -139,5 +142,9 @@ public class Song {
     public void playSong() {
         if (clip != null && !isPlaying)
             resume();
+    }
+
+    public String getCurrentAudioPathNameMp3() {
+        return currentAudioPathName.substring(0,currentAudioPathName.length()-3) + "mp3";
     }
 }

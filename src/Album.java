@@ -11,6 +11,7 @@ public class Album {
 
     private final HashMap<Integer, Song> songs = new HashMap<>();
     private final String songPath = "res/songsInfo.txt";
+    Converter converter = new Converter();
 
     public int currentSongIndex = 1; // 1-based indexing
 
