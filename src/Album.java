@@ -14,6 +14,8 @@ public class Album {
 
     public int currentSongIndex = 1; // 1-based indexing
 
+    public static Converter converter = new Converter();
+
     public Album() {
         loadSongsFromFile();
 
@@ -43,12 +45,14 @@ public class Album {
                     String imagePath = parts[3].trim();
                     int duration = Integer.parseInt(parts[4].trim());
                     String audioPath = parts[5].trim();
+                    converter.createWavAndArtwork("res/" + audioPath.substring(0, audioPath.length() - 3) + "mp3");
                     Song song = new Song(nameOfSong, artist, imagePath, duration, audioPath);
                     System.out.println(song.getCurrentAudioPathNameMp3());
                     songs.put(songIndex, song);
                     totalNumOfSongs++;
                 }
             }
+            System.out.println(totalNumOfSongs);
         } catch (Exception e) {
             System.err.println("Failed to load songs: " + e.getMessage());
         }

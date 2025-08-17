@@ -16,8 +16,6 @@ public class Song {
     private Clip clip;
     private long clipMicrosecondPos = 0;
 
-    public static Converter converter = new Converter();
-
     public Song(String nameOfSong, String artist, String currentImagePathName, int duration, String currentAudioPathName) {
         this.nameOfSong = nameOfSong;
         this.artist = artist;

@@ -171,6 +171,4 @@ public class Converter {
             System.out.println("Failed to extract artwork: " + e.getMessage());
         }
     }
-
-
 }

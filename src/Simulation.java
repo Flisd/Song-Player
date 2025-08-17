@@ -268,7 +268,6 @@ public class Simulation {
     }
 
     public void setUpPictures() {
-        //Song.converter.createArtwork((album.nextImagePathName).substring(0, album.nextImagePathName.length() - 3) + "mp3");
         StdDraw.picture(-300, 200, "res/" + album.nextImagePathName, 150, 150);
         StdDraw.picture(-225, 125, "res/" + album.nextNextImagePathName, 70, 70);
         StdDraw.picture(-200, -150, "res/" + album.currentImagePathName, 200, 200);
@@ -307,6 +306,7 @@ public class Simulation {
 
         boolean nextPressedNow = nextButton.isClicked();
         if (nextPressedNow && !nextPressedLastFrame) {
+            Album.converter.createWav(album.getSong(album.currentSongIndex).getCurrentAudioPathNameMp3());
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 
@@ -323,6 +323,7 @@ public class Simulation {
 
         boolean prevPressedNow = previousButton.isClicked();
         if (prevPressedNow && !prevPressedLastFrame) {
+            Album.converter.createWav(album.getSong(album.currentSongIndex).getCurrentAudioPathNameMp3());
             if (lastNextPrevClickTime == 0 || currentTime - lastNextPrevClickTime >= 500) {
                 lastNextPrevClickTime = currentTime;
 
