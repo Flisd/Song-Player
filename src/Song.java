@@ -29,7 +29,6 @@ public class Song {
 
     private void loadClip() {
         try {
-            converter.createWav(getCurrentAudioPathNameMp3());
             File audioFile = new File("WavFolder/" + currentAudioPathName);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             clip = AudioSystem.getClip();

@@ -11,7 +11,6 @@ public class Album {
 
     private final HashMap<Integer, Song> songs = new HashMap<>();
     private final String songPath = "res/songsInfo.txt";
-    Converter converter = new Converter();
 
     public int currentSongIndex = 1; // 1-based indexing
 
@@ -19,7 +18,7 @@ public class Album {
         loadSongsFromFile();
 
         if (songs.isEmpty()) {
-            System.err.println("No songs found in " + songPath);
+            System.out.println("No songs found in " + songPath);
             return;
         }
 
@@ -44,8 +43,8 @@ public class Album {
                     String imagePath = parts[3].trim();
                     int duration = Integer.parseInt(parts[4].trim());
                     String audioPath = parts[5].trim();
-
                     Song song = new Song(nameOfSong, artist, imagePath, duration, audioPath);
+                    System.out.println(song.getCurrentAudioPathNameMp3());
                     songs.put(songIndex, song);
                     totalNumOfSongs++;
                 }

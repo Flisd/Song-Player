@@ -1,40 +1,40 @@
-1~Pompeii~Bastille~default.png~214~Pompeii.wav
-2~Oh My Lovely~Daniel Lanoids~redDead.png~192~Oh My Lovely.wav
-3~Summer of '69~Bryan Adams~summer.png~216~Summer of '69.wav
-4~Stronger~Kanye West~graduation.png~312~Stronger.wav
-5~I wonder~Kanye West~graduation.png~243~I wonder.wav
-6~Cinderella~Future~cinderella.png~170~Cinderella.wav
-7~Rhythm of the Rain~The Cascades~cascade.png~146~Rhythm of the Rain.wav
-8~Cruel World~Josh Homme~redDead.png~218~Cruel World.wav
-9~Space Cadet~Metro Boomin~cadet.png~203~Space Cadet.wav
-10~Thrift Shop~Macklemore Ryan Lewis~default.png~235~Thrift Shop.wav
-11~Can't Hold Us~Macklemore Ryan Lewis~default.png~258~Can't Hold Us.wav
-12~Another Day in Paradise~Phil Collins~paradise.png~322~Another Day in Paradise.wav
-13~Pumped Up Kicks~Foster The People~default.png~239~Pumped Up Kicks.wav
-14~Rasputin~Boney M~default.png~220~Rasputin.wav
-15~Sixteen Tons~Tennessee Ernie Ford~default.png~155~Sixteen Tons.wav
-16~The Next Episode~Dr Dre Snoop Dogg~default.png~161~The Next Episode.wav
-17~Giorno's Theme~Samuel Kim~default.png~310~Giorno's Theme.wav
-18~Rhythm Of The Rain~The Cascades~default.png~146~Rhythm Of The Rain.wav
-19~Fortunate Son~CCR~default.png~140~Fortunate Son.wav
-20~We Didn't Start The Fire~Billy Joel~default.png~287~We Didn't Start The Fire.wav
-21~Homecoming~Kanye West Chris Martin~default.png~203~Homecoming.wav
-22~From The Start~Laufey~default.png~169~From The Start.wav
-23~Falling Behind~Laufey~default.png~173~Falling Behind.wav
-24~Want You Back~Speedz~default.png~181~Want You Back.wav
-25~By Myself~Speedz Valious~default.png~114~By Myself.wav
-26~Be My Lover~La Bouche~default.png~241~Be My Lover.wav
-27~Hotel California~Eagles~default.png~391~Hotel California.wav
-28~He's A Pirate~Klaus Badelt~default.png~90~He's A Pirate.wav
-29~Around The World~Daft Punk~default.png~429~Around The World.wav
-30~Beat It~Michael Jackson~default.png~258~Beat It.wav
-31~Everybody Wants To Rule The World~Tears For Fears~default.png~251~Everybody Wants To Rule The World.wav
-32~Rockefeller Street~Getter Jaani~default.png~155~Rockefeller Street.wav
-33~I'm Still Standing~Elton John~default.png~183~I'm Still Standing.wav
-34~Sweet Dreams~Eurythmics~default.png~216~Sweet Dreams.wav
-35~Smooth Criminal~Michael Jackson~default.png~257~Smooth Criminal.wav
-36~Seven Nation Army~The Hit Crew~default.png~236~Seven Nation Army.wav
-37~I Made For Lovin You~KISS~default.png~271~I Made For Lovin You.wav
-38~Lay All Your Love On Me~ABBA~default.png~274~Lay All Your Love On Me.wav
-39~Kung Fu Fighting~Carl Douglas~default.png~197~Kung Fu Fighting.wav
-40~Butterfly~Smile DK~default.png~177~Butterfly.wav
+1~Pompeii~Bastille~Pompeii.png~214~Pompeii.wav
+2~Thrift Shop~Macklemore Ryan Lewis~Thrift Shop.png~235~Thrift Shop.wav
+3~Summer of '69~Bryan Adams~Summer of '69.png~216~Summer of '69.wav
+4~Stronger~Kanye West~Stronger.png~312~Stronger.wav
+5~I wonder~Kanye West~I wonder.png~243~I wonder.wav
+6~Cinderella~Future~Cinderella.png~170~Cinderella.wav
+7~Rhythm of the Rain~The Cascades~Rhythm of the Rain.png~146~Rhythm of the Rain.wav
+8~Cruel World~Josh Homme~Cruel World.png~218~Cruel World.wav
+9~Space Cadet~Metro Boomin~Space Cadet.png~203~Space Cadet.wav
+10~Can't Hold Us~Macklemore Ryan Lewis~Can't Hold Us.png~258~Can't Hold Us.wav
+11~Oh My Lovely~Daniel Lanoids~default.png~192~Oh My Lovely.wav
+12~Another Day in Paradise~Phil Collins~Another Day in Paradise.png~322~Another Day in Paradise.wav
+13~Pumped Up Kicks~Foster The People~Pumped Up Kicks.png~239~Pumped Up Kicks.wav
+14~Rasputin~Boney M~Rasputin.png~220~Rasputin.wav
+15~Sixteen Tons~Tennessee Ernie Ford~Sixteen Tons.png~155~Sixteen Tons.wav
+16~The Next Episode~Dr Dre Snoop Dogg~The Next Episode.png~161~The Next Episode.wav
+17~Giorno's Theme~Samuel Kim~Giorno's Theme.png~310~Giorno's Theme.wav
+18~Rhythm Of The Rain~The Cascades~Rhythm Of The Rain.png~146~Rhythm Of The Rain.wav
+19~Fortunate Son~CCR~Fortunate Son.png~140~Fortunate Son.wav
+20~We Didn't Start The Fire~Billy Joel~We Didn't Start The Fire.png~287~We Didn't Start The Fire.wav
+21~Homecoming~Kanye West Chris Martin~Homecoming.png~203~Homecoming.wav
+22~From The Start~Laufey~From The Start.png~169~From The Start.wav
+23~Falling Behind~Laufey~Falling Behind.png~173~Falling Behind.wav
+24~Want You Back~Speedz~Want You Back.png~181~Want You Back.wav
+25~By Myself~Speedz Valious~By Myself.png~114~By Myself.wav
+26~Be My Lover~La Bouche~Be My Lover.png~241~Be My Lover.wav
+27~Hotel California~Eagles~Hotel California.png~391~Hotel California.wav
+28~He's A Pirate~Klaus Badelt~He's A Pirate.png~90~He's A Pirate.wav
+29~Around The World~Daft Punk~Around The World.png~429~Around The World.wav
+30~Beat It~Michael Jackson~Beat It.png~258~Beat It.wav
+31~Everybody Wants To Rule The World~Tears For Fears~Everybody Wants To Rule The World.png~251~Everybody Wants To Rule The World.wav
+32~Rockefeller Street~Getter Jaani~Rockefeller Street.png~155~Rockefeller Street.wav
+33~I'm Still Standing~Elton John~I'm Still Standing.png~183~I'm Still Standing.wav
+34~Sweet Dreams~Eurythmics~Sweet Dreams.png~216~Sweet Dreams.wav
+35~Smooth Criminal~Michael Jackson~Smooth Criminal.png~257~Smooth Criminal.wav
+36~Seven Nation Army~The Hit Crew~Seven Nation Army.png~236~Seven Nation Army.wav
+37~I Made For Lovin You~KISS~I Made For Lovin You.png~271~I Made For Lovin You.wav
+38~Lay All Your Love On Me~ABBA~Lay All Your Love On Me.png~274~Lay All Your Love On Me.wav
+39~Kung Fu Fighting~Carl Douglas~Kung Fu Fighting.png~197~Kung Fu Fighting.wav
+40~Butterfly~Smile DK~Butterfly.png~177~Butterfly.wav
