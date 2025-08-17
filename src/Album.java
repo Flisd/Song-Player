@@ -16,8 +16,8 @@ public class Album {
 
     public static Converter converter = new Converter();
 
-    public Album() {
-        loadSongsFromFile();
+    public Album(int numSongToLoad) {
+        loadSongsFromFile(numSongToLoad);
 
         if (songs.isEmpty()) {
             System.out.println("No songs found in " + songPath);
@@ -27,11 +27,7 @@ public class Album {
         updateImagePaths();
     }
 
-    public int getTotalNumOfSongs() {
-        return totalNumOfSongs;
-    }
-
-    private void loadSongsFromFile() {
+    private void loadSongsFromFile(int numSongsToLoad) {
         try (Scanner scanner = new Scanner(new File(songPath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -50,6 +46,8 @@ public class Album {
                     System.out.println(song.getCurrentAudioPathNameMp3());
                     songs.put(songIndex, song);
                     totalNumOfSongs++;
+                    if(totalNumOfSongs >= numSongsToLoad)
+                        break;
                 }
             }
             System.out.println(totalNumOfSongs);
@@ -133,5 +131,9 @@ public class Album {
         }
 
         return false;
+    }
+
+    public int getTotalNumOfSongs() {
+        return totalNumOfSongs;
     }
 }

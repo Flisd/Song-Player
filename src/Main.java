@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.File;
 
 public class Main {
     public static int height = Simulation.size;
@@ -20,6 +21,16 @@ public class Main {
 
         StdDraw.enableDoubleBuffering();
 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            File wavFolder = new File("wavFolder");
+            if (wavFolder.exists() && wavFolder.isDirectory()) {
+                for (File file : wavFolder.listFiles()) {
+                    if (file.isFile()) {
+                        file.delete();
+                    }
+                }
+            }
+        }));
 
         while (true) {
             StdDraw.clear(Simulation.backgroundColor);
@@ -28,6 +39,7 @@ public class Main {
 
             StdDraw.pause(1);
             StdDraw.show();
+
         }
     }
 

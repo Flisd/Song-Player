@@ -13,7 +13,7 @@ public class Simulation {
 
     Random rand = new Random();
 
-    Album album = new Album();
+    Album album = new Album(5);
 
     private boolean nextPressedLastFrame = false;
     private boolean prevPressedLastFrame = false;

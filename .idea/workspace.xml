@@ -6,20 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="51b115f0-ecef-491d-984c-7bf6ca046b9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Giorno's Theme - Epic Version - Cover.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Giorno's Theme.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Hotel California - 2013 Remaster.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Hotel California.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/I Was Made For Lovin' You.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/I Made For Lovin You.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Rasputin - Single Version.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Rasputin.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Rockefeller Street (New Nightcore) [#Rockefellerstreet Remix].mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Rockefeller Street.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Seven Nation Army - Instrumental.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Seven Nation Army.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Smooth Criminal - 2012 Remaster.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Smooth Criminal.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/Sweet Dreams (Are Made of This) - 2005 Remaster.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/Sweet Dreams.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/The Good, The Bad And The Ugly - 2004 Remaster.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/res/The Good, The Bad And The Ugly.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/songsInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/songsInfo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Album.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Song.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
