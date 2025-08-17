@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,6 +11,9 @@ public class Album {
     private int totalNumOfSongs;
 
     private final HashMap<Integer, Song> songs = new HashMap<>();
+
+    private final HashMap<Integer, String> onlySongNames = new HashMap<>();
+
     private final String songPath = "res/songsInfo.txt";
 
     public int currentSongIndex = 1; // 1-based indexing
@@ -18,6 +22,7 @@ public class Album {
 
     public Album(int numSongToLoad) {
         loadSongsFromFile(numSongToLoad);
+        loadOnlySongNames();
 
         if (songs.isEmpty()) {
             System.out.println("No songs found in " + songPath);
@@ -53,6 +58,25 @@ public class Album {
             System.out.println(totalNumOfSongs);
         } catch (Exception e) {
             System.err.println("Failed to load songs: " + e.getMessage());
+        }
+    }
+
+    private void loadOnlySongNames() {
+        onlySongNames.clear();
+        try (Scanner scanner = new Scanner(new File(songPath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                if (line.isEmpty())
+                    continue;
+                String[] parts = line.split("~");
+                if (parts.length == 6) {
+                    int songIndex = Integer.parseInt(parts[0].trim());
+                    String nameOfSong = parts[1].trim();
+                    onlySongNames.put(songIndex, nameOfSong);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to load song names: " + e.getMessage());
         }
     }
 
@@ -98,22 +122,14 @@ public class Album {
     }
 
     public boolean searchSong(String songToSearch) {
-        for (Song song : songs.values()) {
-            if (song.getNameOfSong().equalsIgnoreCase(songToSearch)) {
-                currentSongIndex = songs.entrySet().stream()
-                        .filter(entry -> entry.getValue().equals(song))
-                        .map(Map.Entry::getKey)
-                        .findFirst()
-                        .orElse(currentSongIndex);
+        for (Map.Entry<Integer, String> entry : onlySongNames.entrySet()) {
+            if (entry.getValue().equalsIgnoreCase(songToSearch)) {
+                currentSongIndex = entry.getKey();
                 updateImagePaths();
                 return true;
             }
         }
         return false;
-    }
-
-    public String getCurrentImagePathName() {
-        return currentImagePathName;
     }
 
     public boolean searchSongNotExact(String songToSearch) {
@@ -121,9 +137,8 @@ public class Album {
             return false;
 
         String lowerSearch = songToSearch.toLowerCase();
-        for (Map.Entry<Integer, Song> entry : songs.entrySet()) {
-            Song song = entry.getValue();
-            if (song.getNameOfSong().toLowerCase().contains(lowerSearch)) {
+        for (Map.Entry<Integer, String> entry : onlySongNames.entrySet()) {
+            if (entry.getValue().toLowerCase().contains(lowerSearch)) {
                 currentSongIndex = entry.getKey();
                 updateImagePaths();
                 return true;
@@ -131,6 +146,10 @@ public class Album {
         }
 
         return false;
+    }
+
+    public String getCurrentImagePathName() {
+        return currentImagePathName;
     }
 
     public int getTotalNumOfSongs() {
